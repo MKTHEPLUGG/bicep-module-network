@@ -18,24 +18,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Step
-        uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          # Git version steps:
-      - name: Install GitVersion
-        uses: gittools/actions/gitversion/setup@v0
-        with:
-          versionSpec: '5.x'
-      - name: Determine Version
-        id: gitversion
-        uses: gittools/actions/gitversion/execute@v0
-        with:
-          useConfigFile: true
-          configFilePath: gitversion.yml
-      - name: tag the repo
-        run: |
-          echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
-          echo ${{ env.semVer }}
-          git tag ${{ steps.gitversion.outputs.semVer }}
-          git push origin ${{ steps.gitversion.outputs.semVer }}
+    # we are referring to the actions directory here ( same as templating in AzDevOps )
+    - name: Tag the repo
+      uses: ./.github/actions/gvtag
+        
