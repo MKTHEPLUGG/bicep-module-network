@@ -1,10 +1,6 @@
 name: 'Tag a git version'
 description: 'Tagging a repo with a gitVersion'
 
-
-inputs:
-
-
 runs:
   using: composite
   steps:
