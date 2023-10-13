@@ -37,5 +37,5 @@ jobs:
         run: |
           echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
           echo ${{ env.semVer }}
-          git tag ${{ env.semVer }}
-          git push origin ${{ env.semVer }}
+          git tag ${{ steps.gitversion.outputs.semVer }}
+          git push origin ${{ steps.gitversion.outputs.semVer }}
