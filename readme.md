@@ -8,3 +8,5 @@ this is our main example of RD CICD Course
 ### Usefull shortcuts
 
 PRESS `SHIFT + .` to open code in browser !!!
+
+blabla
