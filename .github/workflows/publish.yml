@@ -32,4 +32,4 @@ jobs:
         with:
           inlineScript: |
             az account show
-            az bicep publish --force --file .\module\network.bicep --target br:eruza123.azurecr.io/bicep/modules/network:v${{ vars.GITHUB_REF_NAME }}
+            az bicep publish --force --file ./module/network.bicep --target br:eruza123.azurecr.io/bicep/modules/network:v${{ vars.GITHUB_REF_NAME }}
