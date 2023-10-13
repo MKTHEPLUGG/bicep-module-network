@@ -7,8 +7,7 @@ permissions:
 
 on:
   push:
-#    branches: [ "main" ]
-    tags: [ "*" ]
+    branches: [ "main" ]
 #  pull_request:
 #    branches: [ "main" ]
 
@@ -32,7 +31,5 @@ jobs:
         with:
           inlineScript: |
             az account show
-            az bicep publish --force --file .\module\network.bicep --target br:eruza123.azurecr.io/bicep/modules/network:v${{ vars.GITHUB_REF_NAME }}
-
           # Azure CLI version to be used to execute the script. If not provided, latest version is used
           # azcliversion: # optional, default is agentazcliversion
