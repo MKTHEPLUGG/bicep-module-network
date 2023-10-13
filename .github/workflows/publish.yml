@@ -1,0 +1,35 @@
+name: GitVersion Tag
+
+# Expose workload identity, assign permissions in pipeline itself / differce from azure DevOps
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+#    branches: [ "main" ]
+    tags: [ "*" ]
+#  pull_request:
+#    branches: [ "main" ]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Step
+        uses: actions/checkout@v3
+      - name: Azure Login
+        uses: Azure/login@v1.4.6
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+      - name: Azure CLI Action
+        uses: Azure/cli@v1.0.8
+        with:
+          inlineScript: |
+            az account show
+            az bicep publish --force --file .\module\network.bicep --target br:eruza123.azurecr.io/bicep/modules/network:v${{ vars.GITHUB_REF_NAME }}
