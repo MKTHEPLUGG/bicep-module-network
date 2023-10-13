@@ -1,6 +1,7 @@
 name: 'Tag a git version'
 description: 'Tagging a repo with a gitVersion'
 
+
 runs:
   using: composite
   steps:
@@ -17,6 +18,7 @@ runs:
       configFilePath: gitversion.yml
   - name: tag the repo
     if: ${{ github.ref == 'refs/heads/main' }}
+    shell: bash
     run: |
       echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
       echo ${{ env.semVer }}
