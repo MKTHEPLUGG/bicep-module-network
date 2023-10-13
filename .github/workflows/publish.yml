@@ -1,4 +1,4 @@
-name: GitVersion Tag
+name: Publish Module
 
 # Expose workload identity, assign permissions in pipeline itself / differce from azure DevOps
 permissions:
