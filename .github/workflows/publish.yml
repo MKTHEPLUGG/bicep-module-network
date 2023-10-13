@@ -17,7 +17,7 @@ jobs:
   build:
     environment: prd
     runs-on: ubuntu-latest
-    if: ${{ ! startsWith(github.ref, 'refs/tags/') }}
+    if: ${{ startsWith(github.ref, 'refs/tags/') }}
     steps:
       - name: Checkout Step
         uses: actions/checkout@v3
