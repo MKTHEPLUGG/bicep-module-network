@@ -20,16 +20,20 @@ jobs:
     steps:
       - name: Checkout Step
         uses: actions/checkout@v3
-      - name: Azure Login
-        uses: Azure/login@v1.4.6
         with:
-          client-id: ${{ secrets.AZURE_CLIENT_ID }}
-          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
-          subscription-id: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
-      - name: Azure CLI Action
-        uses: Azure/cli@v1.0.8
+          fetch-depth: 0
+          # Git version steps:
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v0
         with:
-          inlineScript: |
-            az account show
-          # Azure CLI version to be used to execute the script. If not provided, latest version is used
-          # azcliversion: # optional, default is agentazcliversion
+          versionSpec: '5.x'
+      - name: Determine Version
+        id: gitversion
+        uses: gittools/actions/gitversion/execute@v0
+        with:
+          useConfigFile: true
+          configFilePath: gitversion.yml
+      - name: tag the repo
+        run: |
+          echo "SemVer: ${{ steps.gitversion.outputs.semVer }}"
+          echo ${{ envs.semVer }}
