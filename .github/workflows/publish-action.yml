@@ -1,0 +1,28 @@
+name: Publish Module via action
+
+# Expose workload identity, assign permissions in pipeline itself / differce from azure DevOps
+permissions:
+  id-token: write
+  contents: read
+
+on:
+  push:
+    tags:
+    - "*"
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+jobs:
+  build:
+    environment: prd
+    runs-on: ubuntu-latest
+    steps:
+    - name: Publish Bicep Module
+      uses: MKTHEPLUGG/bicep-publish-action@v1
+      with:
+        azureClientId: ${{ secrets.AZURE_CLIENT_ID }}
+        azureTenantId: ${{ secrets.AZURE_TENANT_ID }}
+        azureSubscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
+        moduleName: './module/network.bicep'
+        moduleTag: ${{ github.ref_name }}
