@@ -22,7 +22,8 @@ jobs:
       uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # we are referring to the actions directory here ( same as templating in AzDevOps )
-    - name: Tag the repo
-      uses: ./.github/actions/gvtag
+    # we are referring to the remote repo
+      uses: MKTHEPLUGG/gitversion-tag-action@v1
+      with:
+        configFilePath: gitversion.yml
         
