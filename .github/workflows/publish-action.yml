@@ -26,3 +26,4 @@ jobs:
         azureSubscriptionId: ${{ secrets.AZURE_SUBSCRIPTION_ID }}
         moduleName: './module/network.bicep'
         moduleTag: ${{ github.ref_name }}
+        module: 'network'
